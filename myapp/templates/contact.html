@@ -1,0 +1,56 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block contant %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+<body>
+  <center>
+<table cellpadding="8px" border="6" width="70%">
+<tr>
+  <th>s.no  </th>
+  <th>first name</th>
+  <th>last name</th>
+  <th>email</th>
+  <th>mobile</th>
+  <th>address</th>
+  <th>gender</th>
+  <th>language</th>
+  <th>edit</th>
+  <th>delet</th>
+
+</tr>
+
+{% for i in user %}
+<tr>
+  <td> {{i.id }}</td>
+  <td> {{i.fname }}</td>
+  <td> {{i.lname }}</td>
+  <td> {{i.email }}</td>
+  <td> {{i.mobile }}</td>
+  <td> {{i.address }}</td>
+  <td> {{i.gender }}</td>
+  <td>{{i.language}}</td>
+  <td>
+    <form method="get" action="{% url 'updateprofile' pk=i.pk %}">
+      {% csrf_token%}
+    <input type="submit" name="action" value="edit">
+    </form>   
+  </td>
+  <td>
+    <form action="{% url 'delet' pk=i.pk %}">
+      <input type="submit" name="delet" value="delet">
+  </form>
+  </td>
+</tr>
+  {% endfor %}
+
+</table>
+</center>
+</body>
+</html>
+{% endblock %}
